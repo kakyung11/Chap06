@@ -90,4 +90,9 @@ public class MemberController {
 			return "t_member";
 		}
 	}
+	
+	@GetMapping("/info")
+	public String infoHandle(){
+		return "t_member";
+	}
 }
