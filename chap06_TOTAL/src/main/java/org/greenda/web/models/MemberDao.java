@@ -28,7 +28,7 @@ public class MemberDao {
 	}
 	
 	public boolean logIn(Map map){
-		Map m = template.selectOne("member.logIn",map);	
+		Map m = template.selectOne("member.login",map);	
 		boolean b=false;
 		if(m != null){
 			b=true;

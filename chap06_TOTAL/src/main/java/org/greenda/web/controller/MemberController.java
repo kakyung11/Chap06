@@ -31,11 +31,12 @@ public class MemberController {
 	MemberDao memberDao;	
 	
 	@GetMapping("/join")
-	public ModelAndView getJoinHandle(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t_member");
-		mav.addObject("section", "member/join");
-		return mav;
+	public String getJoinHandle(Map map){
+		//ModelAndView mav = new ModelAndView();
+		//mav.setViewName("t_member");
+		//mav.addObject("section", "member/join");
+		map.put("section", "member/join");
+		return "t_member";
 	}
 	
 	@PostMapping("/join")
@@ -54,6 +55,8 @@ public class MemberController {
 	@PostMapping(path="/signup_check/{mode}",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public boolean signupCheckHandle(@RequestBody(required=false) String body, @PathVariable(name="mode")String mode) throws SQLException{
+		System.out.println(mode);
+		System.out.println(body);
 		boolean b=true;
 		if(mode.equals("id")){
 			b = memberDao.checkId(body);
@@ -67,11 +70,11 @@ public class MemberController {
 	}
 	
 	// login Ã³¸®
-	@GetMapping("/logIn")
+	@GetMapping("/login")
 	public ModelAndView getloginHandle(){	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t_member");
-		mav.addObject("section", "member/logIn");
+		mav.addObject("section", "member/login");
 		return mav;
 	}
 	
@@ -83,7 +86,7 @@ public class MemberController {
 			return "redirect:/board/list";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
-			mMap.addAttribute("section", "member/logIn");
+			mMap.addAttribute("section", "member/login");
 			return "t_member";
 		}
 	}
