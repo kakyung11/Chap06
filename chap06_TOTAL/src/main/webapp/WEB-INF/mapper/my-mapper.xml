@@ -17,7 +17,7 @@
 	<select id="readRecentProfile" resultType="java.util.HashMap">
 		select * from (select * from profile where id=#{id} order by uploaddate desc) where rownum=1
 	</select>
-	<select id="readAllProfile">
+	<select id="readAllProfile" resultType="java.util.HashMap">
 		select * from profile where id=#{id} order by uploaddate desc	
 	</select>
 </mapper>

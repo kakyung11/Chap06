@@ -2,6 +2,7 @@ package org.greenda.web.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,7 +78,7 @@ public class MyController {
 		ModelAndView mav = new ModelAndView("t_my");
 		
 		System.out.println("파일 실제 경로 : "+application.getRealPath("/profiles")); // 파일이 저장되는 실제 경로를 찍어줌
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		System.out.println("파일 정보===============");
 		System.out.println(f.toString());
 		System.out.println(f.getContentType());
@@ -108,5 +111,12 @@ public class MyController {
 		mav.addObject("section", "my/profile");
 		return mav;
 	}
-
+	
+	@PostMapping(path="/readAllProfile",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public List<Map> readAllProfileHandle(@RequestBody(required=false) String body){
+		System.out.println(body);
+		List<Map> list = myDao.readAllProfile(body);
+		return list;
+	}
 }
