@@ -2,6 +2,7 @@ package org.greenda.web.controller;
 
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +28,8 @@ public class MyController {
 	ObjectMapper mapper;
 	@Autowired
 	MyDao myDao;
+	@Autowired
+	ServletContext application;
 	
 	//Info
 	@GetMapping("/info")
@@ -59,8 +62,9 @@ public class MyController {
 	
 	@PostMapping("/profile")
 	public ModelAndView postProfileHandle(@RequestParam Map map,
-					@RequestParam(name="profile") MultipartFile f ,HttpServletRequest request){
-		System.out.println(request.getParameter("nick"));
+					@RequestParam(name="profile") MultipartFile f ,HttpServletRequest request) throws InterruptedException{
+		System.out.println(application.getRealPath("/temp"));
+		Thread.sleep(10000);
 		ModelAndView mav = new ModelAndView("t_my");
 		System.out.println("파일 정보===============");
 		System.out.println(f.toString());
