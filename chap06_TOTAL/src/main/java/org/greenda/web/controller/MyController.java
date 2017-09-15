@@ -1,5 +1,7 @@
 package org.greenda.web.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -30,6 +32,8 @@ public class MyController {
 	MyDao myDao;
 	@Autowired
 	ServletContext application;
+	@Autowired
+	SimpleDateFormat sdf;
 	
 	//Info
 	@GetMapping("/info")
@@ -55,17 +59,23 @@ public class MyController {
 	
 	//Profile 이미지 
 	@GetMapping("/profile")
-	public ModelAndView getProfileHandle(){
+	public ModelAndView getProfileHandle(HttpSession session){
 		ModelAndView mav = new ModelAndView("t_my");
+		String id = (String) session.getAttribute("auth");
+		Map map = myDao.readRecentProfile(id);
+		//System.out.println(map);
 		mav.addObject("section", "my/profile");
-		return mav;	}
+		mav.addObject("RecentProfile", map);
+		return mav;	
+	}
 	
 	@PostMapping("/profile")
-	public ModelAndView postProfileHandle(@RequestParam Map map,
+	public ModelAndView postProfileHandle(@RequestParam Map map, HttpSession session,
 					@RequestParam(name="profile") MultipartFile f ,HttpServletRequest request) throws InterruptedException{
-		System.out.println(application.getRealPath("/temp"));
-		Thread.sleep(10000);
 		ModelAndView mav = new ModelAndView("t_my");
+		
+		System.out.println("파일 실제 경로 : "+application.getRealPath("/profiles")); // 파일이 저장되는 실제 경로를 찍어줌
+		Thread.sleep(5000);
 		System.out.println("파일 정보===============");
 		System.out.println(f.toString());
 		System.out.println(f.getContentType());
@@ -73,9 +83,27 @@ public class MyController {
 		System.out.println(f.getOriginalFilename());
 		System.out.println(f.getSize());
 		System.out.println(f.isEmpty());
-		System.out.println("postProfileHandle="+map);
 		System.out.println("=====================");
-		// transeferTo(File f) == 실제 업로드. 
+		
+		// 파일업로드 시키기
+		String fileName = session.getAttribute("auth")+"_"+sdf.format(System.currentTimeMillis())+".jpg";
+		System.out.println("fileName: "+fileName);
+		File profileImg = new File(application.getRealPath("/profiles"), fileName);
+		String fileUrl = "/profiles/"+fileName;
+		System.out.println("fileUrl: "+fileUrl);
+		try {
+			String type = f.getContentType();	// 가져온 파일의 타입 확인
+			if(type.startsWith("image")){
+				f.transferTo(profileImg); // transeferTo(File f) == 실제 업로드. 
+				map.put("fileUrl", fileUrl);
+				int r = myDao.uploadProfile(map);
+				//System.out.println(r); 
+				Map m = myDao.readRecentProfile((String)session.getAttribute("auth"));
+				mav.addObject("RecentProfile", m);
+			}						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		mav.addObject("section", "my/profile");
 		return mav;

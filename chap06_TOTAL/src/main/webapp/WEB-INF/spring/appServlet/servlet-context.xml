@@ -64,6 +64,9 @@
 	
 	<!-- converter -->
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	<bean class="java.text.SimpleDateFormat">
+		<constructor-arg name="pattern" value="yyyyMMddHHmmSS"/>
+	</bean>
 	
 	<!-- viewResolver customizing -->
 		<!-- Tiles 등록 view를 jsp가 아니라 tiles로 처리하도록 설정하는것	 -->

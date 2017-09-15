@@ -83,7 +83,7 @@ public class MemberController {
 		try{
 			Map m = memberDao.logIn(map);
 			session.setAttribute("auth", m.get("ID"));
-			System.out.println(session.getAttribute("auth"));
+			//System.out.println(session.getAttribute("auth"));
 			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
