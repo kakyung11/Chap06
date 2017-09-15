@@ -44,7 +44,7 @@ public class MemberController {
 		try{
 			int r = memberDao.addOne(map);
 			session.setAttribute("auth", map.get("id"));
-			return "redirect:/board/list";
+			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
 			mMap.addAttribute("section", "member/join");
@@ -81,18 +81,16 @@ public class MemberController {
 	@PostMapping("/session")
 	public String postloginHandle(@RequestParam Map map, HttpSession session, ModelMap mMap ) throws SQLException{
 		try{
-			boolean b = memberDao.logIn(map);
-			session.setAttribute("auth", map.get("id"));
-			return "redirect:/board/list";
+			Map m = memberDao.logIn(map);
+			System.out.println(m.get("ID"));
+			session.setAttribute("auth", m.get("ID"));
+			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
 			mMap.addAttribute("section", "member/login");
+			System.out.println(e);
 			return "t_member";
 		}
 	}
-	
-	@GetMapping("/info")
-	public String infoHandle(){
-		return "t_member";
-	}
+
 }

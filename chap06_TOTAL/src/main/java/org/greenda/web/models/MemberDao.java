@@ -27,15 +27,9 @@ public class MemberDao {
 		return email.equals(result);
 	}
 	
-	public boolean logIn(Map map){
-		Map m = template.selectOne("member.login",map);	
-		boolean b=false;
-		if(m != null){
-			b=true;
-		}
-		return b;
+	public Map logIn(Map map){
+		return template.selectOne("member.login",map);	
+
 	}
-	public Map readOnesAll(Map map){
-		return template.selectOne("member.logIn",map);	
-	}
+
 }

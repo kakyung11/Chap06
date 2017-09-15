@@ -16,7 +16,9 @@
 		select email from member where email=#{email}
 	</select>
 	<select id="login" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select * from member where (id =#{id}  or email=#{id}) and pass = #{pass}
+		select * from member where (id =#{idEmail}  or email=#{idEmail}) and pass = #{pass}
 	</select>
+	
+	
 
 </mapper>

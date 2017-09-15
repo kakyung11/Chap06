@@ -5,10 +5,10 @@
 	<form action="/member/session" method="post">
 		<fieldset>
 			<p>
-				<b>ID/Email</b><br> <input type="text" id="id" name="id" />
+				<b>ID/Email</b><br> <input type="text" id="idEmail" name="idEmail" />
 			</p>
 			<p>
-				<b>PW</b><br> <input type="password" id="pw" name="pw" />
+				<b>PW</b><br> <input type="password" id="pass" name="pass" />
 			</p>
 			<p>
 				<b>로그인 유지</b> <input type="checkbox" id="keepIn" name="keep"

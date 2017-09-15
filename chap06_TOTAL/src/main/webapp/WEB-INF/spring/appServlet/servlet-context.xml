@@ -30,6 +30,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>/WEB-INF/mapper/member-mapper.xml</value>
+				<value>/WEB-INF/mapper/my-mapper.xml</value>
 			</list>
 		</property>
 	</bean>
