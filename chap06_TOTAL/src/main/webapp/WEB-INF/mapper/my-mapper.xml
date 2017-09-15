@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my">	
+<!-- 디테일  -->
+	<update id="editDetail" parameterType="java.util.HashMap">
+		update detail set name=#{name,jdbcType=VARCHAR}, gender=#{gender,jdbcType=VARCHAR}, birth=#{birth,jdbcType=NUMERIC}, address=#{address,jdbcType=VARCHAR} where id=#{id} 
+	</update>
+	<select id="readOneDetail" resultType="java.util.HashMap">
+		select * from detail where id=#{id} 
+	</select>
+</mapper>

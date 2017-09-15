@@ -82,13 +82,13 @@ public class MemberController {
 	public String postloginHandle(@RequestParam Map map, HttpSession session, ModelMap mMap ) throws SQLException{
 		try{
 			Map m = memberDao.logIn(map);
-			System.out.println(m.get("ID"));
 			session.setAttribute("auth", m.get("ID"));
+			System.out.println(session.getAttribute("auth"));
 			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
 			mMap.addAttribute("section", "member/login");
-			System.out.println(e);
+			e.printStackTrace();
 			return "t_member";
 		}
 	}
