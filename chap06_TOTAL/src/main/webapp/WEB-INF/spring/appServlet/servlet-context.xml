@@ -15,6 +15,15 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="org.greenda.web" />
+	
+	<!-- multipartResolver 등록 -->
+		<!-- 파일 처리를 위해 꼭 필요함
+			이름으로 뽑아서 처리하기 때문에 반드시 id="multipartResolver"로 명시적으로 등록해야 한다
+	 	 -->
+	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  	<property name="uploadTempDir" value="/temp"/>
+	  	<property name="defaultEncoding" value="utf-8"/>
+	  </bean>	
 
 	<!-- datasource -->
 	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="ds">

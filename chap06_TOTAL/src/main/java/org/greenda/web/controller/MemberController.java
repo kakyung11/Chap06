@@ -92,5 +92,11 @@ public class MemberController {
 			return "t_member";
 		}
 	}
-
+	
+	//logout
+	@GetMapping("/logout")
+	public String logoutHandle(HttpSession session){	
+		session.invalidate();
+		return "redirect:/member/login";
+	}
 }
