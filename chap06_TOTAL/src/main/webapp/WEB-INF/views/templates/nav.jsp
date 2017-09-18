@@ -6,7 +6,7 @@
 
 	<c:choose>
 		<c:when test="${!empty auth }">
-			<a href="/member/logout">LOGOUT</a> | <a href="/member/join">JOIN</a> |
+			<a href="/member/logout">LOGOUT</a> | <a href="/member/readAllMemberInfo">AllMembers</a> |
 			<a href="/my/info">INFO</a> | <a href="/my/profile">PROFILE</a> |
 			<a href="/board/list">BOARD</a> | <a href="/market/list">MARKET</a>
 		</c:when>

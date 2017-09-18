@@ -61,8 +61,9 @@
 		xhr.onreadystatechange = function(){
 			if(this.readyState==4){
 				var obj = JSON.parse(this.responseText);
-				var html = "<h3>프로필 전체보기</h3><table>"
-				html += "<tr><th><input type=\"checkbox\" id=\"all\" onchange=\"javascript:allcheck()\"></th></tr>";
+				var html = "<h3>프로필 전체보기</h3><table>";
+				html += "<tr><th><input type=\"checkbox\" id=\"all\" onchange=\"javascript:allcheck()\">전체선택</th>";
+				html +=	"<th><button type=\"button\" id=\"delete\" style=\"width:50px\">삭제</button></th></tr>";
 				for(i in obj){
 					html += "<tr>";
 					html += "<td><input type=\"checkbox\" class=\"check\" name=\"no\" value=\""+obj[i].NO
@@ -74,9 +75,9 @@
 				html += "</table>";
 				document.getElementById("profileImgs").innerHTML = html;
 			}
-		}
+		}  
 	}
-	
+	 
 	//check All
 	function allcheck(){
 		var all = document.getElementById("all");
@@ -120,5 +121,19 @@
 			}
 		}
 	}
+	
+	document.getElementById("delete").onclick = function(){
+		var xhr = new XMLHttpRequest();
+		var id = document.getElementById("id").value;
+		xhr.open("post","/my/deleteImage",true);
+		xhr.send(id);
+		xhr.onreadystatechange = function(){
+			if(this.readyState==4){
+				
+				
+			}
+		}
+	}
+	
 	
 </script>

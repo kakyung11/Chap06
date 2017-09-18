@@ -42,7 +42,7 @@ public class MyController {
 	@GetMapping("/info")
 	public String getInfoHandle(HttpSession session, ModelMap mMap){
 		String id = (String) session.getAttribute("auth");
-		System.out.println(id);
+		//System.out.println(id);
 		Map map = myDao.readOneDetail(id);
 		mMap.addAttribute("detail", map);
 		mMap.addAttribute("section", "my/info");		

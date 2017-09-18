@@ -18,7 +18,10 @@
 	<select id="login" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from member where (id =#{idEmail}  or email=#{idEmail}) and pass = #{pass}
 	</select>
-	
+	<!-- 전체 회원 정보 가져오기 -->
+	<select id="readAllMemberInfo" resultType="java.util.HashMap">
+		select md.*, p.url from (select m.*, d.name from member m left join detail d on m.id=d.id) md left join (select id, max(fileurl) as url from profile group by id) p on md.id=p.id order by md.id asc
+	</select>
 	
 
 </mapper>

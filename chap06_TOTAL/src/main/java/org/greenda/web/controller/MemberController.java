@@ -99,4 +99,13 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/member/login";
 	}
+	
+	@GetMapping("/readAllMemberInfo")
+	public ModelAndView readAllMemberInfoHandle(HttpSession session){
+		ModelAndView mav = new ModelAndView("t_member");
+		List<Map> list = memberDao.readAllMemberInfo();
+		mav.addObject("allMemberInfo", list);
+		mav.addObject("section", "member/readAllMemberInfo");
+		return mav;
+	}
 }

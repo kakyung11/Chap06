@@ -1,5 +1,6 @@
 package org.greenda.web.models;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,6 +31,10 @@ public class MemberDao {
 	public Map logIn(Map map){
 		return template.selectOne("member.login",map);	
 
+	}
+	
+	public List<Map> readAllMemberInfo(){
+		return template.selectList("member.readAllMemberInfo");
 	}
 
 }
