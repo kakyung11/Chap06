@@ -22,6 +22,14 @@
 	<select id="readAllMemberInfo" resultType="java.util.HashMap">
 		select md.*, p.url from (select m.*, d.name from member m left join detail d on m.id=d.id) md left join (select id, max(fileurl) as url from profile group by id) p on md.id=p.id order by md.id asc
 	</select>
+	<select id="readMemberPaging" resultType="java.util.HashMap">
+		select * from 
+    (select md.*, p.url, rownum as r from (select m.*, d.name from member m left join detail d on m.id=d.id) md left join
+        (select id, max(fileurl) as url from profile group by id) p on md.id=p.id) t where r between #{start} and #{end} order by t.id asc
+	</select>
+	<select id="memberCount" resultType="java.lang.Integer">
+		select count(*) from member
+	</select>
 	
 
 </mapper>

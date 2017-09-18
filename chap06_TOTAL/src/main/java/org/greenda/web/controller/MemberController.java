@@ -101,10 +101,21 @@ public class MemberController {
 	}
 	
 	@GetMapping("/readAllMemberInfo")
-	public ModelAndView readAllMemberInfoHandle(HttpSession session){
+	public ModelAndView readAllMemberInfoHandle(@RequestParam(name="page", defaultValue="1") int page,HttpSession session){
 		ModelAndView mav = new ModelAndView("t_member");
-		List<Map> list = memberDao.readAllMemberInfo();
-		mav.addObject("allMemberInfo", list);
+		int count = memberDao.memberCount();
+		if(count%5==0){
+			count = count/5;
+		}else{
+			count = count/5+1;
+		}
+		Map map = new HashMap();
+		map.put("start", (page-1)*5+1);
+		map.put("end", page*5);
+		List<Map> list = memberDao.readMemberPaging(map);
+		//List<Map> list = memberDao.readAllMemberInfo();
+		mav.addObject("pageCount", count);
+		mav.addObject("memberInfo", list);
 		mav.addObject("section", "member/readAllMemberInfo");
 		return mav;
 	}

@@ -36,5 +36,13 @@ public class MemberDao {
 	public List<Map> readAllMemberInfo(){
 		return template.selectList("member.readAllMemberInfo");
 	}
+	
+	public List<Map> readMemberPaging(Map map){
+		return template.selectList("member.readMemberPaging",map);
+	}
+	public int memberCount(){
+		return template.selectOne("member.memberCount");
+	}
+
 
 }
