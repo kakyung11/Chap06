@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import org.greenda.web.controller.ws.AlertWSHandler;
 import org.greenda.web.models.MemberDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,9 @@ public class MemberController {
 	@Autowired
 	ObjectMapper mapper;
 	@Autowired
-	MemberDao memberDao;	
+	MemberDao memberDao;
+	@Autowired
+	AlertWSHandler alertws; // 웹소켓 핸들러 와이어링 받아둠
 	
 	@GetMapping("/join")
 	public String getJoinHandle(Map map){
@@ -44,6 +47,8 @@ public class MemberController {
 		try{
 			int r = memberDao.addOne(map);
 			session.setAttribute("auth", map.get("id"));
+			// AlertWSHandler를 통해서, 메세지를 보냄
+			alertws.sendMessage("누군가 가입하였습니다");			
 			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);
