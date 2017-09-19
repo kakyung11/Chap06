@@ -33,12 +33,9 @@ public class ChatWSHandler extends TextWebSocketHandler {
 		System.out.println(json);
 		for(WebSocketSession wss : list){
 			wss.sendMessage(new TextMessage(json)); 
-		}
-
-		
+		}		
 	}
-	
-	
+		
 	@PostConstruct // bean이 생성되면서 추가적으로 해야할 것들을 설정해줌   = init-method
 	public void chatWSInit(){
 		System.out.println("ChatWSHandler - chatWSInit()");

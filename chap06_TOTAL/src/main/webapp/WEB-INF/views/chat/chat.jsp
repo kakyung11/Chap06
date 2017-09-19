@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div align="center">
 	<h3>Open Chat</h3>
-	<div id="log" style="width: 80%; height:100%; background-color: #D5D5D5" align="left">
+	<div id="log" style="width: 80%; height:100%; background-color: #D5D5D5; overflow-y:scroll; word-break:break-all;" align="left">
 	
 	</div>
 	<input type="text" id="f" style="width:80%; margin-top: 5px; padding: 4px"/>
@@ -36,6 +36,7 @@
 		if(obj.mode=="out"){
 			document.getElementById("log").innerHTML += "<p><b>[사용자가 채팅방을 나갔습니다.] 총 "+obj.cnt+"명 </b></p>";
 		}
+		document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight+25;
 	}
 	
 </script>
