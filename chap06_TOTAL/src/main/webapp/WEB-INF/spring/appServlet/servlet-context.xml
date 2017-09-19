@@ -51,6 +51,7 @@
 			<list>
 				<value>/WEB-INF/mapper/member-mapper.xml</value>
 				<value>/WEB-INF/mapper/my-mapper.xml</value>
+				<value>/WEB-INF/mapper/market-mapper.xml</value>
 			</list>
 		</property>
 	</bean>

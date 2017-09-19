@@ -23,4 +23,9 @@
 		<put-attribute name="title" value="Chat-HUB"/>
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
+	
+		<definition name="t_market" extends="t_base">
+		<put-attribute name="title" value="Market-HUB"/>
+		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
+	</definition>
 </tiles-definitions> 

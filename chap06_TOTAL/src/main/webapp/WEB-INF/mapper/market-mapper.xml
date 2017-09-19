@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+	<insert id="addOne" parameterType="java.util.HashMap">
+		insert into market values(market_seq.nextval,#{goods},#{startPrice},#{instantPrice,jdbcType=NUMERIC}, #{cutOffDate,jdbcType=DATE})
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select m.cutoffdate-sysdate as gab, m.* from market m order by num asc
+	</select>
+	<select id="readOne" resultType="java.util.HashMap">
+		select * from market where num=#{num} 
+	</select>
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select m.cutoffdate-sysdate as gab, m.* from market m where m.startprice &gt; #{price} and (m.cutoffdate &gt; sysdate or m.cutoffdate is null)
+		<if test="check != null"> 
+			 and m.instantPrice is null order by m.startprice asc
+		</if>
+	</select> 
+</mapper>
