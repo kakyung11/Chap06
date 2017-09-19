@@ -200,6 +200,14 @@
 		    <artifactId>tiles-extras</artifactId>
 		    <version>3.0.7</version>
 		</dependency>
+		
+		<!-- spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>4.3.9.RELEASE</version>
+		</dependency>
+		
 		   
 	</dependencies>
 	

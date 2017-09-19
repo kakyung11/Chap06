@@ -6,7 +6,9 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:c="http://www.springframework.org/schema/c"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
@@ -15,6 +17,15 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="org.greenda.web" />
+	
+	<!-- WebSocket handler -->
+	<bean class="org.greenda.web.controller.ws.BasicWSController" id="bws"/>
+	
+	<websocket:handlers>
+		<websocket:mapping handler="bws" path="/ws/basic"/>
+		<websocket:mapping handler="chatws" path="/ws/chat"/>
+		<websocket:mapping handler="alertws" path="/ws/alert"/>
+	</websocket:handlers>
 	
 	<!-- multipartResolver 등록 -->
 		<!-- 파일 처리를 위해 꼭 필요함
