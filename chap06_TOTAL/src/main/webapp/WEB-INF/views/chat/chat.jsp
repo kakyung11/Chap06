@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div align="center">
-	<h3>Open Chat</h3>
+	<h3>Open Chat <span id="cnt"></span>
+	</h3>
 	<div id="log" style="width: 80%; height:100%; background-color: #D5D5D5; overflow-y:scroll; word-break:break-all;" align="left">
 	
 	</div>
@@ -25,16 +26,19 @@
 		}
 	}
 	ws.onmessage=function(e){
-		console.log(e.data +"/"+typeof e.data);
+		//console.log(e.data +"/"+typeof e.data);
 		var obj = JSON.parse(e.data);
-		if(obj.mode=="chat"){
+		document.getElementById("cnt").innerHTML = "("+obj.cnt+")";
+		switch(obj.mode){
+		case "join":
+			document.getElementById("log").innerHTML += "<p><b style=\"color:green\">["+obj.user+"]가 입장하였습니다.</b></p>";
+			break;
+		case "chat":
 			document.getElementById("log").innerHTML += "<p><b>["+obj.sender+"] : "+obj.msg+"</b></p>";
-		}
-		if(obj.mode=="join"){
-			document.getElementById("log").innerHTML += "<p><b>[새로운 사용자가 입장하였습니다.] 총 "+obj.cnt+"명 </b></p>";
-		}
-		if(obj.mode=="out"){
-			document.getElementById("log").innerHTML += "<p><b>[사용자가 채팅방을 나갔습니다.] 총 "+obj.cnt+"명 </b></p>";
+			break;
+		case "out":
+			document.getElementById("log").innerHTML += "<p><b style=\"color:red\">["+obj.user+"가 퇴장하였습니다.]</b></p>";
+			break;
 		}
 		document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight+25;
 	}

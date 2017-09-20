@@ -48,7 +48,7 @@ public class MemberController {
 			int r = memberDao.addOne(map);
 			session.setAttribute("auth", map.get("id"));
 			// AlertWSHandler를 통해서, 메세지를 보냄
-			alertws.sendMessage("누군가 가입하였습니다");			
+			alertws.sendMessage(map.get("id")+"님이 가입하였습니다");			
 			return "redirect:/my/info";
 		}catch(Exception e){
 			mMap.addAttribute("temp", map);

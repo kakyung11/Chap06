@@ -28,9 +28,10 @@ public class ChatWSHandler extends TextWebSocketHandler {
 			map.put("sender", "사용자"+session.getId()); // WepSocket Session id != HttpSession id 
 													   // 자동으로 1씩 증가 설정됨
 			map.put("msg", message.getPayload()); 	   // 사용자가 보낸 문자열이 들어옴
+			map.put("cnt", list.size());
 			
 		String json = mapper.writeValueAsString(map);
-		System.out.println(json);
+		//System.out.println(json);
 		for(WebSocketSession wss : list){
 			wss.sendMessage(new TextMessage(json)); 
 		}		
@@ -45,16 +46,17 @@ public class ChatWSHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		list.add(session);
-		String json = String.format("{\"mode\":\"join\", \"cnt\":%d }", list.size());
+		String json = String.format("{\"mode\":\"join\", \"cnt\":%d ,\"user\":\"%s\"}", list.size(),"사용자"+session.getId());
 		for(WebSocketSession wss : list){
-			wss.sendMessage(new TextMessage(json)); 
+			if (wss != session)
+				wss.sendMessage(new TextMessage(json));
 		}
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		list.remove(session);
-		String json = String.format("{\"mode\":\"out\", \"cnt\":%d }" , list.size());
+		String json = String.format("{\"mode\":\"out\", \"cnt\":%d,\"user\":\"%s\" }" , list.size(),"사용자"+session.getId());
 		for(WebSocketSession wss : list){
 			wss.sendMessage(new TextMessage(json)); 
 		}
