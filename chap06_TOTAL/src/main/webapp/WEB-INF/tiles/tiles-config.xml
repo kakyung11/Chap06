@@ -33,4 +33,15 @@
 		<put-attribute name="title" value="Memo-HUB"/>
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
+	
+	<definition name="t_service" extends="t_base">
+		<put-attribute name="title" value="Service-HUB"/>
+		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
+	</definition>
+	
+	<definition name="t_jquery" extends="t_base">
+		<put-attribute name="title" value="Service-HUB"/>
+		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
+	</definition>
+	
 </tiles-definitions> 

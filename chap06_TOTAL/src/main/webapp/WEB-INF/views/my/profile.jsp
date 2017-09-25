@@ -125,7 +125,7 @@
 	document.getElementById("delete").onclick = function(){
 		var xhr = new XMLHttpRequest();
 		var id = document.getElementById("id").value;
-		xhr.open("post","/my/deleteImage",true);
+		xhr.open("post","/my/deleteImage",true); 
 		xhr.send(id);
 		xhr.onreadystatechange = function(){
 			if(this.readyState==4){
