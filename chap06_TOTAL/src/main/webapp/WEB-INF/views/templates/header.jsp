@@ -9,8 +9,8 @@
 </header>
 <script>
 
-	<!--var aws = new WebSocket("ws://192.168.10.73/ws/alert");-->
-	var aws = new WebSocket("ws://172.30.1.1/ws/alert");
+	var aws = new WebSocket("ws://192.168.10.73/ws/alert");
+	<!--var aws = new WebSocket("ws://172.30.1.1/ws/alert");-->
 	aws.onmessage=function(e){
 		console.log(e.data +"/"+typeof e.data);
 		window.alert(e.data);

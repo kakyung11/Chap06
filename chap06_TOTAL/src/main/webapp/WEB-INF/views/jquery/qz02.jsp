@@ -9,7 +9,7 @@
 <hr>
 <div>
 	<h3>삼성노트북 코어 i5</h3>
-	판매가 : 650650
+	판매가 : 650650<span id="s"></span>
 	<hr>
 	옵션 :<span id="options"></span>
 	<ul style="list-style: none;" >
@@ -37,6 +37,11 @@
 	var price =650650;
 	var tot=0;
 	var ar = [];
+	function() print {
+		var t = price*parseInt($("#number").val());
+		$("#s").html(" ["+t+"]");
+	}
+	
 	$(".option").change(function(){
 		var sum = 0;
 		if($(this).prop("checked")){
@@ -49,11 +54,13 @@
 		}else{
 			sum -= parseInt($(this).attr("data"));
 			console.log(sum);
-			ar.pop($(this).val());
+			ar.splice(ar.indexOf($(this).val()),1);
+			//ar.pop($(this).val());
 		}
 		price += sum;
 		console.log(price);
 		$("#options").html(ar);
+		print();
 	});
 	
 	
@@ -63,6 +70,8 @@
 			var n = parseInt($("#number").val())-1;
 			$("#number").val(n); 
 			console.log($("#number").val());
+			var t = price*parseInt($("#number").val());
+			$("#s").html(" ["+t+"]");
 		}
 	});
 	// 수량 plus
@@ -70,6 +79,8 @@
 		console.log($("#number").val());
 		var n = parseInt($("#number").val())+1;
 		$("#number").val(n);
+		var t = price*parseInt($("#number").val());
+		$("#s").html(" ["+t+"]");
 	});
 	
 	// 총액 계산
@@ -78,8 +89,8 @@
 		var t = price*parseInt($("#number").val());
 		tot += t;
 		$("#adds").html("<button id=\"price"+(++p)+"\">"+t+"</button> "+$("#adds").html());
+		$("#s").html(" ["+t+"]");
 		$("#total").html(tot);
-		//$("#total").html("<fmt\:formatNumber value=\""+parseInt(tot)+"\" pattern=\"#,###\"/>");
 	});
 	
 </script>
