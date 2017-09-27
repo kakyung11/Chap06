@@ -30,6 +30,19 @@
 	<select id="memberCount" resultType="java.lang.Integer">
 		select count(*) from member
 	</select>
+	<!-- 친구찾기 -->
+	<select id="searchById" resultType="java.util.HashMap">
+		select m.*, d.* from member m join detail d on m.id = d.id
+			where m.id like #{id}
+	</select>
 	
-
+	<!-- 차트 테스트 용-->
+	<select id="countByGender" resultType="java.util.HashMap">
+		select nvl(gender,'미설정') as gender, count(*) as cnt from detail group by gender
+	</select>
+	
+	<select id="countByResearch" resultType="java.util.HashMap">
+		select score, count(*) as cnt from RESEARCH group by score
+	</select>
+	
 </mapper>

@@ -44,4 +44,9 @@
 		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
 	</definition>
 	
+	<definition name="t_chart" extends="t_base">
+		<put-attribute name="title" value="Service-HUB"/>
+		<put-attribute name="section" expression="/WEB-INF/views/${section}.jsp"/>
+	</definition>
+	
 </tiles-definitions> 

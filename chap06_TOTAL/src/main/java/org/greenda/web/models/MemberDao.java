@@ -44,5 +44,15 @@ public class MemberDao {
 		return template.selectOne("member.memberCount");
 	}
 
+	public List<Map> searchById(String id) {
+		return template.selectList("member.searchById", id);
+	}
+	
+	public List<Map> countByGender(){
+		return template.selectList("member.countByGender");
+	}
+	public List<Map> countByResearch(){
+		return template.selectList("member.countByResearch");
+	}
 
 }

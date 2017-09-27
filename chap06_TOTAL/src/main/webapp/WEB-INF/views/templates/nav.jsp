@@ -9,12 +9,13 @@
 			<a href="/member/logout">LOGOUT</a> | <a href="/member/readAllMemberInfo">AllMembers</a> |
 			<a href="/my/info">INFO</a> | <a href="/my/profile">PROFILE</a> |
 			<a href="/board/list">BOARD</a> | <a href="/market/list">MARKET</a> |
-			<a href="/memo/list">MEMO</a> | <a href="/chat/chat">CHAT</a>
+			<a href="/memo/list">MEMO</a> | <a href="/chat/chat">CHAT</a> |
+			<a href="/member/search">친구찾기</a>
 		</c:when>
 		<c:otherwise>
 			<a href="/member/login">LOGIN</a> | <a href="/member/join">JOIN</a> |
 			<a href="/board/list">BOARD</a> | <a href="/market/list">MARKET</a> |
-			<a href="/chat/chat">CHAT</a>
+			<a href="/chat/chat">CHAT</a> | <a href="/member/search">친구찾기</a>
 		</c:otherwise>	
 	</c:choose>
 
